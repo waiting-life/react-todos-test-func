@@ -1,6 +1,6 @@
 import React from 'react'
 import PubSub from 'pubsub-js'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import './index.css'
 export default function List() {
@@ -53,12 +53,12 @@ export default function List() {
             { 
               todos.map((todo, index) => {
                 return(
-                  <li key={todo.id} className="todo">
+                  <li key={ todo.id } className="todo">
                     <div className="todo-box">
-                      <input type="checkbox" onChange={() => handleToggle(todo.id)} className="todo-toggle" />
-                      <span className="todo-content">{todo.value}</span>
+                      <input type="checkbox" checked={ todo.done } onChange={ () => handleToggle(todo.id) } className="todo-toggle" />
+                      <span className="todo-content">{ todo.value }</span>
                     </div>
-                    <button onClick={() => deleteTodo(index)}>删除</button>
+                    <button onClick={ () => deleteTodo(index) }>删除</button>
                   </li>
                 )
               })
@@ -67,34 +67,54 @@ export default function List() {
           <Route path="/completed">
             {
               todos.map((todo, index) => {
-                if (todo.done) {
-                  return (
-                    <li key={todo.id} className="todo">
-                      <div className="todo-box">
-                        <input type="checkbox" onChange={() => handleToggle(todo.id)} className="todo-toggle" />
-                        <span className="todo-content">{todo.value}</span>
-                      </div>
-                      <button onClick={() => deleteTodo(index)}>删除</button>
-                    </li>
-                  )
-                }
+                return todo.done ? (
+                  <li key={ todo.id } className="todo">
+                    <div className="todo-box">
+                      <input type="checkbox" checked={ todo.done } onChange={ () => handleToggle(todo.id) } className="todo-toggle" />
+                      <span className="todo-content">{ todo.value }</span>
+                    </div>
+                    <button onClick={ () => deleteTodo(index) }>删除</button>
+                  </li>
+                ) : null 
+                // if (todo.done) {
+                //   return (
+                //     <li key={todo.id} className="todo">
+                //       <div className="todo-box">
+                //         <input type="checkbox" onChange={() => handleToggle(todo.id)} className="todo-toggle" />
+                //         <span className="todo-content">{todo.value}</span>
+                //       </div>
+                //       <button onClick={() => deleteTodo(index)}>删除</button>
+                //     </li>
+                //   )
+                // } else {
+                //   return null
+                // }
               })
             }
           </Route>
           <Route path="/inCompleted">
             {
               todos.map((todo, index) => {
-                if (!todo.done) {
-                  return (
-                    <li key={todo.id} className="todo">
-                      <div className="todo-box">
-                        <input type="checkbox" onChange={() => handleToggle(todo.id)} className="todo-toggle" />
-                        <span className="todo-content">{todo.value}</span>
-                      </div>
-                      <button onClick={() => deleteTodo(index)}>删除</button>
-                    </li>
-                  )
-                }
+                return !todo.done ? (
+                  <li key={ todo.id } className="todo">
+                    <div className="todo-box">
+                      <input type="checkbox" checked={ todo.done } onChange={ () => handleToggle(todo.id) } className="todo-toggle" />
+                      <span className="todo-content">{ todo.value }</span>
+                    </div>
+                    <button onClick={ () => deleteTodo(index) }>删除</button>
+                  </li>
+                ) : null
+                // if (!todo.done) {
+                //   return (
+                //     <li key={todo.id} className="todo">
+                //       <div className="todo-box">
+                //         <input type="checkbox" checked={todo.done} onChange={() => handleToggle(todo.id)} className="todo-toggle" />
+                //         <span className="todo-content">{todo.value}</span>
+                //       </div>
+                //       <button onClick={() => deleteTodo(index)}>删除</button>
+                //     </li>
+                //   )
+                // }
               })
             }
           </Route>
