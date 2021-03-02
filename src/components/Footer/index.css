@@ -7,3 +7,8 @@
 .footer-container button {
   font-size: 20px;
 }
+.footer-container button span {
+  color: pink;
+  font-weight: 600;
+  font-size: 20px;
+}
