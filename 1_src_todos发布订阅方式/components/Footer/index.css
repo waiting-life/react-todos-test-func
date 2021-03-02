@@ -1,0 +1,14 @@
+.footer-container {
+  height: 60px;
+  line-height: 60px;
+  display: flex;
+  justify-content: space-around;
+}
+.footer-container button {
+  font-size: 20px;
+}
+.footer-container button span {
+  color: pink;
+  font-weight: 600;
+  font-size: 20px;
+}

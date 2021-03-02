@@ -1,0 +1,10 @@
+.input-constainer input {
+  padding: 16px 16px 16px 44px;
+  box-sizing: border-box;
+  font-size: 22px;
+  color: rgb(77, 77, 77);
+}
+.input-constainer input::placeholder {
+  font-style: italic;
+  color: #999;
+}
