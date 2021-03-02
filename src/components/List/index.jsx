@@ -3,17 +3,22 @@ import PubSub from 'pubsub-js'
 import { Switch, Route } from 'react-router-dom'
 
 import './index.css'
-export default function List() {
-  const [todos, setTodos] = React.useState([])
-  React.useEffect(() => {
-    PubSub.subscribe('addTodo', (_, todo) => {
-      let newTodos
-      newTodos = [todo, ...todos]
-      setTodos(newTodos)
-      // console.log(todos)
-    })
-  }, [todos])
 
+const { useState } = React
+export default function List() {
+  const [todos, setTodos] = useState([])
+  // 收到增加数据的消息
+  PubSub.subscribe('addTodo', (_, todo) => {
+    let newTodos = [todo, ...todos]
+    setTodos(newTodos)
+  })
+
+  // 和Footer组件通信
+  PubSub.publish('todos', todos)
+  // 接收到触发删除已完成事件的新数据 
+  PubSub.subscribe('newTodos', (_, data) => {
+    setTodos(data)
+  }) 
 
   function deleteTodo(index) {
     let newTodos = [ ...todos ]
