@@ -15,12 +15,18 @@ export default function Footer() {
   function showIncompleted() {
     history.push('/inCompleted')
   }
-  const [todos, setTodos] = useState()
-  
+
+  const [todos, setTodos] = useState([])
   PubSub.subscribe('todos', (_, data) => {
     setTodos(data)
   })
-  // console.log(todos)
+  const len = todos.length
+  const completedTodos = todos.filter(todo => {
+    return todo.done
+  })
+  const completedLen = completedTodos.length
+  const inCompletedLen = len - completedLen
+
   function deleteCompleted() {
     const newTodos = todos.filter((todo) => {
       return !todo.done
@@ -30,9 +36,9 @@ export default function Footer() {
   }
   return (
     <div className="footer-container">
-      <button onClick={ showAll }>显示全部</button>
-      <button onClick={ showCompleted }>显示已完成</button>
-      <button onClick={ showIncompleted }>显示未完成</button>
+      <button onClick={ showAll }>全部 { len } 条</button>
+      <button onClick={showCompleted}>已完成 { completedLen } 条</button>
+      <button onClick={showIncompleted}>未完成 { inCompletedLen } 条</button>
       <button onClick={ deleteCompleted }>删除已完成</button>
     </div>
   )
