@@ -14,7 +14,12 @@ export default function Input(props) {
         value={ value } 
         placeholder="请输入内容..." 
         onChange={ handleChange } 
-        onKeyUp={(e) => { OnAddtodo(e, value); setValue('') } }/>
+        onKeyUp={(e) => { 
+          if (e.keyCode === 13 && value) {
+            OnAddtodo(e, value); 
+            setValue('') 
+          }
+        }}/>
     </div>
   )
 }

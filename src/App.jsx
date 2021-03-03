@@ -9,9 +9,9 @@ const { useState } = React
 export default function App() {
   const [todos, setTodos] = useState([])
   function addTodo(e, value) {
-    if (e.keyCode === 13 && value) {
+    // if (e.keyCode === 13 && value) {
       setTodos([ {id: nanoid(), value, done: false }, ...todos ])
-    }
+    // }
   }
 
   // 点击切换为已完成状态部分
